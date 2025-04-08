@@ -41,3 +41,20 @@ Cloudinary
 
 Nodemailer
 
+
+
+
+🔐 Security
+Password Hashing using bcrypt
+
+JWT Tokens for protected routes
+
+Secure Payments through Razorpay
+
+Input Validation using express-validator
+
+
+📧 Contact
+Developer: Prince Kumar
+Email: princekumar7320918928@gmail.com
+Portfolio: iamprince.vercel.app
