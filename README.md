@@ -5,7 +5,7 @@ It enables users to browse and purchase courses, view content, and interact with
 
 ---
 
-## 🚀 Features
+## 🌟 Features
 
 - 🧑‍🏫 **User Roles**: Supports Students and Instructors
 - 🔐 **Authentication & Authorization**: JWT-based login, role-based access
