@@ -3,13 +3,16 @@
 const Category = require("../models/Category");
 const Course = require("../models/Course");
 
+//get the category course details
 module.exports.getCategoryDetails = async (req, res) => {
   try {
     //get category id
-    const { categoryId } = req.body;
+
+    const { category } = req.params;
 
     //get courses for specified category
-    const selectedCategory = await Category.findById(categoryId).populate("course");
+    const selectedCategory = await Category.findOne({ name: category }).populate("course");
+
 
     //validation
     if (!selectedCategory) {
@@ -18,24 +21,21 @@ module.exports.getCategoryDetails = async (req, res) => {
         message: "Category not found"
       });
     }
-
-    //get different catogery
-    const differentCategory = await Category.find({
-      _id: { $ne: categoryId },
-    }).populate("course")
-
-    //get the top selleing course
+    
 
     //return the response
     res.status(200).json({
       success: true,
       message: "Data fetched succefully",
       categoryData: selectedCategory,
-      differentCategory,
     })
 
   } catch (error) {
-
+    res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+      error: error.message
+    })
   }
 }
 

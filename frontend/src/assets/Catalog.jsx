@@ -5,6 +5,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 
 const Dropdown = ({ link, catalogOptions }) => {
   const [isOpen, setIsOpen] = useState(false);
+  console.log("catalogOptions", catalogOptions);
 
   return (
     <div

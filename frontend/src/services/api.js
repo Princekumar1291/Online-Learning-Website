@@ -11,7 +11,7 @@ export const updateprofilepictureUrl=`${BASE_URL}/profile/updateprofilepicture`;
 export const updatepasswordUrl=`${BASE_URL}/auth/updatepassword`;
 export const getEnrolledCourseUrl=`${BASE_URL}/course/getEnrolledCourse`;
 export const userCartUrl=`${BASE_URL}/course/getUserCart`;
-// export const addToCartUrl=`${BASE_URL}/course/addToCart`;
+export const addToCartUrl=`${BASE_URL}/course/addToCart`;
 export const userCartDeleteUrl=`${BASE_URL}/course/deleteUserCart`;
 export const createCourseUrl=`${BASE_URL}/course/createcourse`
 export const createCourseSectionUrl=`${BASE_URL}/course/createCourseSection`
@@ -25,3 +25,5 @@ export const deleteCourseUrl=`${BASE_URL}/course/deleteCourse`;
 export const getCourseDetailsUrl=`${BASE_URL}/course/getCourseDetails`;
 
 export const updateCourseUrl=`${BASE_URL}/course/updateCourse`;
+
+export const getCategoryDetailsUrl=`${BASE_URL}/course/getCategoryDetails`;

@@ -37,6 +37,8 @@ const Navbar = () => {
     fetchCategories();
   }, []);
 
+  
+
 
   return (
     <nav className="bg-gray-900 border-b border-gray-800 shadow-2xl px-6 py-3 relative">

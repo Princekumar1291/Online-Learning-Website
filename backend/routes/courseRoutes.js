@@ -3,7 +3,7 @@ const { auth, isInstructor, isAdmin } = require("../middleware/auth");
 const courseRoutes=express.Router();
 const adminController=require("../controllers/Admin")
 const instructorController=require("../controllers/Instructor");
-const { getCourseDetails } = require("../controllers/Course");
+const { getCourseDetails, getCategoryDetails } = require("../controllers/Course");
 
 courseRoutes.post("/createcategory",auth,isAdmin,adminController.postCategory)
 courseRoutes.get("/showAllCategory",adminController.showAllCategory)
@@ -28,5 +28,6 @@ courseRoutes.delete("/deleteUserCart",auth,instructorController.deleteUserCart);
 
 courseRoutes.get("/getCreatedCourse",auth,isInstructor,instructorController.getCreatedCourse);
 
+courseRoutes.get('/getCategoryDetails/:category',getCategoryDetails);
 
 module.exports=courseRoutes;

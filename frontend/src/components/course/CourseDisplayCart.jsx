@@ -51,7 +51,7 @@ const CourseDisplayCart = ({ item }) => {
         <h2 className="text-lg font-bold">{item.courseName}</h2>
         <p className="text-sm">{item.courseDescription}</p>
         <p className="text-sm font-bold">${item.price}</p>
-        {/* <Link to={`/course/${item._id}`} className="text-blue-500 hover:underline">Learn More</Link> */}
+        <Link to={`/course/${item._id}`} className="text-blue-500 hover:underline">Learn More</Link>
       </div>
       <div className='flex flex-col gap-2'>
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleOnEditClick}>Edit</button>

@@ -336,7 +336,7 @@ const Home = () => {
       </div>
       
       {/* footer  */}
-      <Footer/>
+      {/* <Footer/> */}
 
     </div>
   );
