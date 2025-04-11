@@ -100,6 +100,92 @@ module.exports.postCourse=async (req,res)=>{
   }
 }
 
+//delete course
+module.exports.deleteCourse=async (req,res)=>{
+  try {
+    const id=req.body.id;
+    const course=await Course.findByIdAndDelete(id);
+    if(!course){
+      return res.status(404).json({
+        success:false,
+        message:"Course not found"
+      })
+    }
+    return res.status(200).json({
+      success:true,
+      message:"Course is deleted successfully",
+      course
+    })
+    
+  } catch (error) {
+    return res.status(500).json({
+      success:false,
+      message:"Internal Server Error",
+      error:error.message
+    })
+  }
+}
+
+//update course
+module.exports.updateCourse=async (req,res)=>{
+  try {
+    const courseId=req.params.courseId;
+    console.log("courseId",courseId)
+    const {courseName,courseDescription,whatYouWillLearn,tag,price,category}=req.body;
+
+    //get thumbnail
+    let thumbnail=null;
+    try {
+      thumbnail=req.files.thumbnail;
+    } catch (error) {
+      
+    }
+
+    //upload image to cloudinary
+    let thumbnailImage=null;
+    if(thumbnail){
+       thumbnailImage=await uploadImageToCloudinary(thumbnail,"CodeBoost/coursesThumbnailImage");
+    }
+
+    //check tag is valid or not
+    const categoryDetails=await Category.findOne({name:category});
+    if(!categoryDetails){
+      return res.status(400).json({
+        success:false,
+        message:"Category not found"
+      })
+    }
+
+    //update course
+    const course=await Course.findByIdAndUpdate(courseId,{
+      courseName,
+      courseDescription,
+      whatYouWillLearn,
+      price,
+      category:categoryDetails._id,
+      tags:tag,
+    })
+
+    if(thumbnailImage){
+      course.thumbnail=thumbnailImage.secure_url;
+    }
+    await course.save();
+      
+    return res.status(200).json({
+      success:true,
+      message:"Course is updated successfully",
+      course
+    })
+    
+  } catch (error) {
+    return res.status(500).json({
+      success:false,
+      message:"Internal Server Error",
+      error:error.message
+    })
+  }
+}
+
 
 //get all courses
 module.exports.getCourses=async (req,res)=>{
@@ -116,13 +202,30 @@ module.exports.getCourses=async (req,res)=>{
     return res.status(500).json({
       success:false,
       message:"All courses",
-      courses,
       error:error.message
     })
   }
 }
 
-
+//get created course by Instructor
+module.exports.getCreatedCourse=async (req,res)=>{
+  try {
+    const id=req.user.id;
+    const instructor=await User.findById(id).populate("courses");
+    return res.status(200).json({
+      success:true,
+      message:"Created course by Instructor",
+      instructor
+    })
+    
+  } catch (error) {
+    return res.status(500).json({
+      success:false,
+      message:"Created course by Instructor",
+      error:error.message
+    })
+  }
+}
 
 
 //create section

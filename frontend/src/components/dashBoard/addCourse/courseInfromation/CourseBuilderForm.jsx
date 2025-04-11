@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import YellowButton from "../../../core/HomePage/YellowButton";
 import { MdCreateNewFolder } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
 import NastedViewCreate from '../NastedViewCreate';
-import { setCoursesSection } from '../../../../store/slices/createCourse';
+import { setCoursesid, setCoursesSection, setEditCourse, setStep } from '../../../../store/slices/createCourse';
 import { apiConnector } from '../../../../services/apiconnector';
 import { createCourseSectionUrl } from '../../../../services/api';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 
 const CourseBuilderForm = () => {
   const [sectionName, setSectionName] = useState("");
   const { token } = useSelector(state => state.auth)
-  const { courseId } = useSelector(state => state.step)
+  const { courseId,editCourse,courseSubsection } = useSelector(state => state.step)
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const handleCreateSection = async (event) => {
@@ -33,7 +35,16 @@ const CourseBuilderForm = () => {
 
   const handleOnButtonClick = () => {
     console.log("handleOnButtonClick called");
+    navigate("/dashboard/my-courses");
+    dispatch(setEditCourse(false));
+    dispatch(setStep(1));
+    dispatch(setCoursesid(null));
   };
+
+  // useEffect(() => {
+  //   console.log(courseSubsection)
+  // }, [courseSubsection]);
+
 
   return (
     <div className='w-[70%] '>
@@ -62,7 +73,7 @@ const CourseBuilderForm = () => {
         <NastedViewCreate />
       </div>
       <div onClick={handleOnButtonClick}>
-        <YellowButton text="Finish" />
+        <YellowButton text={`${editCourse ? "Update Course" : "Create Course"}`} />
       </div>
     </div>
   );

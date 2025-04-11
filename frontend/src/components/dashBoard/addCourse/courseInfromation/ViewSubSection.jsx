@@ -1,6 +1,7 @@
 import React from 'react'
 
 const ViewSubSection = ({subSection}) => {
+  console.log("subSection",subSection)
   return (
     <div className='bg-gray-600 p-2 m-2 rounded-sm '>
       {

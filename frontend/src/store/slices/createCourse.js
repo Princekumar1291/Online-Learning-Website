@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   step: 1,
-  course:{},
+  course:[],
   courseId: null,
   courseSubsection:[],
   editCourse: false,
@@ -19,6 +19,9 @@ const stepSlice = createSlice({
     setCourses: (state, action) => {
       state.course = action.payload;
     },
+    deleteCourse: (state, action) => {
+      state.course = state.course.filter((course) => course._id !== action.payload);
+    },
     setCoursesid: (state, action) => {
       state.courseId = action.payload;
     },
@@ -30,6 +33,9 @@ const stepSlice = createSlice({
     },
     setCoursesSection:(state,action)=>{
       state.courseSubsection = [...state.courseSubsection, action.payload];
+    },
+    updateCourseSection: (state, action) => {
+      state.courseSubsection=action.payload
     },
     setLectureInSubsection: (state, action) => {
       state.courseSubsection.forEach((sec) => {
@@ -49,6 +55,6 @@ const stepSlice = createSlice({
   },
 });
 
-export const { setStep, setCourses, setEditCourse, setPaymentLoading, resetCourseState, setCoursesid,setCoursesSection,setLectureInSubsection } = stepSlice.actions;
+export const { setStep, setCourses, setEditCourse, setPaymentLoading, resetCourseState, setCoursesid,setCoursesSection,setLectureInSubsection,deleteCourse,updateCourseSection } = stepSlice.actions;
 
 export default stepSlice.reducer;

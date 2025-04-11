@@ -8,7 +8,7 @@ const User = require("../models/User")
 module.exports.getCourseDetails = async (req, res) => {
   try {
     //get course id 
-    const { courseId } = req.body;
+    // const { courseId } = req.body;
 
     //find course details with populate
     const courseDetails = await Course.find({})

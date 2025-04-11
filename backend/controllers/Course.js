@@ -39,12 +39,16 @@ module.exports.getCategoryDetails = async (req, res) => {
   }
 }
 
+//get a course details
 module.exports.getCourseDetails = async (req, res) => {
   try {
-    const { courseId } = req.body;
+    // const { courseId } = req.body;
+    const { courseId } = req.params;
+    console.log("courseId:::",courseId)
     // const course = await Course.findById(courseId).populate(["instructor", "courseContent"]);
     const course = await Course.findById(courseId)
       .populate("instructor")
+      .populate("category")
       .populate({
         path: "courseContent",
         populate: {

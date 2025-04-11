@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { apiConnector } from '../../../../services/apiconnector';
-import { categoryUrl, createCourseUrl } from '../../../../services/api';
+import { categoryUrl, createCourseUrl, getCourseDetailsUrl, updateCourseUrl } from '../../../../services/api';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
-import { setCoursesid, setStep } from '../../../../store/slices/createCourse';
+import { setCoursesid, setCoursesSection, setStep, updateCourseSection } from '../../../../store/slices/createCourse';
 
 const CourseInformationForm = () => {
+  const { editCourse, courseId,courseSubsection } = useSelector((state) => state.step);
+
+
   const [catalogOptions, setCatalogOptions] = useState([]);
   const [imagePreview, setImagePreview] = useState(null);
 
@@ -19,16 +22,48 @@ const CourseInformationForm = () => {
     thumbnail: null
   });
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await apiConnector('GET', categoryUrl);
-        setCatalogOptions(response.data.category);
-      } catch (error) {
-        console.error(error);
+  const fetchCategories = async () => {
+    try {
+      const response = await apiConnector('GET', categoryUrl);
+      setCatalogOptions(response.data.category);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const fetchCourse = async () => {
+    try {
+      const url = `${getCourseDetailsUrl}/${courseId}`
+      console.log("courseIdUrl:  :", url)
+      const response = await apiConnector("GET", url, {}, { Authorization: `Bearer ${token}` });
+      if (response.data.course) {
+        setFormData({
+          courseName: response.data.course.courseName || '',
+          courseDescription: response.data.course.courseDescription || '',
+          whatYouWillLearn: response.data.course.whatYouWillLearn || '',
+          price: response.data.course.price || '',
+          category: response.data.course.category.name || '',
+          tag: response.data.course.tags || ''
+        })
+        setImagePreview(response.data.course.thumbnail)
       }
-    };
-    fetchCategories();
+      console.log("this is response of fetch single course", response.data.course);
+      dispatch(updateCourseSection(response.data.course.courseContent));
+      console.log("this is response of fetch single course", response.data.course.courseContent);
+    } catch (error) {
+      toast.error(error.response.data.message)
+    }
+  }
+  useEffect(() => {
+    if (editCourse) {
+      fetchCourse();
+    }
+  }, [editCourse]);
+
+
+  useEffect(() => {
+    if(!editCourse){
+      fetchCategories();
+    }
   }, []);
 
   const handleChange = (e) => {
@@ -44,6 +79,7 @@ const CourseInformationForm = () => {
   };
 
   const { token } = useSelector((state) => state.auth);
+  
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
@@ -65,8 +101,26 @@ const CourseInformationForm = () => {
     }
   };
 
+  const handleSubmitOnEdit = async (e) => {
+    e.preventDefault();
+    try {
+      const formDataToSend = new FormData();
+      Object.keys(formData).forEach((key) => {
+        formDataToSend.append(key, formData[key]);
+      });
+      const response = await apiConnector("PUT", `${updateCourseUrl}/${courseId}`, formDataToSend, {
+        Authorization: `Bearer ${token}`
+      });
+      toast.success(response.data.message);
+      dispatch(setStep(2));
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Something went wrong");
+      console.error(error);
+    }
+  };
+
   return (
-    <form onSubmit={handleSubmit} className='space-y-4 w-[70%]'>
+    <form onSubmit={editCourse ? handleSubmitOnEdit : handleSubmit} className='space-y-4 w-[70%]'>
       <input
         type="text"
         name="courseName"
@@ -131,7 +185,7 @@ const CourseInformationForm = () => {
         />
       )}
       <button type="submit" className='bg-yellow-500 text-white p-2 rounded'>
-        Submit
+        {editCourse ? "Next" : "Submit"}
       </button>
     </form>
   );

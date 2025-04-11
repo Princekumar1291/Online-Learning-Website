@@ -14,11 +14,7 @@ const RenderSteps = () => {
     {
       id: 2,
       title: "Course Buinder",
-    },
-    // {
-    //   id: 3,
-    //   title: "Publish",
-    // },
+    }
   ]
 
   const { step } = useSelector(state => state.step)

@@ -15,8 +15,11 @@ import Setting from './components/dashBoard/Setting';
 import EnrolledCourses from './components/dashBoard/EnrolledCourses';
 import Cart from './components/cart/Cart';
 import AddCourse from './components/dashBoard/addCourse/AddCourse';
+import { useSelector } from 'react-redux';
+import CreatedCourses from './components/course/CreatedCourses';
 
 function App() {
+  const {userType} = useSelector(state => state.profile)
   return (
     <BrowserRouter>
       <div className='w-screen min-h-screen bg-gray-900 flex flex-col text-white'>
@@ -33,7 +36,7 @@ function App() {
             <Route path='/dashboard' element={<Dashboard />}>
               <Route path='/dashboard/my-profile' element={<MyProfile />}></Route>
               <Route path='/dashboard/setting' element={<Setting/>}></Route>
-              <Route path='/dashboard/enrolled-courses' element={<EnrolledCourses/>}></Route>
+              <Route path='/dashboard/my-courses' element={userType === "Student" ? <EnrolledCourses/> : <CreatedCourses/>}></Route>
               <Route path='/dashboard/cart' element={<Cart/>}></Route>
               <Route path='/dashboard/add-course' element={<AddCourse/>}></Route>
               <Route path='*' element={<Outlet />} />

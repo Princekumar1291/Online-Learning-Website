@@ -17,3 +17,11 @@ export const createCourseUrl=`${BASE_URL}/course/createcourse`
 export const createCourseSectionUrl=`${BASE_URL}/course/createCourseSection`
 
 export const createCourseSubSectionUrl=`${BASE_URL}/course/createCourseSubSection`
+
+export const getCreatedCourseUrl=`${BASE_URL}/course/getCreatedCourse`;
+
+export const deleteCourseUrl=`${BASE_URL}/course/deleteCourse`;
+
+export const getCourseDetailsUrl=`${BASE_URL}/course/getCourseDetails`;
+
+export const updateCourseUrl=`${BASE_URL}/course/updateCourse`;
