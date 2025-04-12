@@ -27,3 +27,7 @@ export const getCourseDetailsUrl=`${BASE_URL}/course/getCourseDetails`;
 export const updateCourseUrl=`${BASE_URL}/course/updateCourse`;
 
 export const getCategoryDetailsUrl=`${BASE_URL}/course/getCategoryDetails`;
+
+export const capturepaymentUrl=`${BASE_URL}/payment/capturepayment`;
+export const verifyPaymentUrl=`${BASE_URL}/payment/verifyPayment`;
+

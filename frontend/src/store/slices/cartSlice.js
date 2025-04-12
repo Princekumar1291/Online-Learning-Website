@@ -10,11 +10,11 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      const index = state.cartItems.findIndex(item => item.id === action.payload.id)
-      if (index >= 0) {
-        toast.error("Item already in cart")
-        return;
-      }
+      // const index = state.cartItems.findIndex(item => item.id === action.payload.id)
+      // if (index >= 0) {
+      //   toast.error("Item already in cart")
+      //   return;
+      // }
       state.cartItems.push(action.payload)
     },
     removeCourse: (state, action) => {

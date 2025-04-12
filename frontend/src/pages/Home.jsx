@@ -13,8 +13,38 @@ import instructor from "../assets/Images/Instructor.png";
 import { useEffect, useState } from "react";
 import Footer from "../components/core/HomePage/Footer";
 import SkillsSection from "../components/core/HomePage/SkillsSection";
+import { apiConnector } from "../services/apiconnector";
+import { userCartUrl } from "../services/api";
+import { useDispatch, useSelector } from "react-redux";
+import { setCart } from "../store/slices/cartSlice";
 
 const Home = () => {
+
+  //cart data loading 
+  const dispatch=useDispatch();
+  
+  const {token}=useSelector(state=>state.auth)
+  const { cartItems } = useSelector(state => state.cart)
+  const fetchCartItems = async () => {
+      try {
+        const response = await apiConnector("GET", userCartUrl, {}, { Authorization: `Bearer ${token}` });
+        dispatch(setCart(response.data.data));
+        console.log(response.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+      
+    useEffect(() => {
+      fetchCartItems();
+      console.log("cartItems",cartItems)
+    }, []);
+
+  
+  
+  
+  
+  
   const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
