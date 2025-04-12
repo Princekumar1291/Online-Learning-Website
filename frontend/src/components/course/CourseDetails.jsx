@@ -42,6 +42,7 @@ const CourseDetails = () => {
 
   const initPayment = async (data) => {
     console.log("data",data);
+
     const options = {
       key:RAZORPAY_KEY,
       amount: data.amount,
