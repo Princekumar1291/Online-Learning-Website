@@ -10,7 +10,7 @@ import About from './pages/About';
 import Error from './pages/Error';
 import ForgotPassword from './pages/ForgotPassword';
 import MyProfile from './components/dashBoard/MyProfile';
-import Dashboard from './pages/DashBoard';
+import Dashboard from './pages/Dashboard';
 import Setting from './components/dashBoard/Setting';
 import EnrolledCourses from './components/dashBoard/EnrolledCourses';
 import Cart from './components/cart/Cart';

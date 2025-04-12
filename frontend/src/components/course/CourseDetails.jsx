@@ -38,11 +38,10 @@ const CourseDetails = () => {
 
 
   // Payment integration
+  const RAZORPAY_KEY=import.meta.env.VITE_RAZORPAY_KEY;
 
   const initPayment = async (data) => {
     console.log("data",data);
-    const RAZORPAY_KEY="rzp_test_6WPaSqGryZoKkZ"
-
     const options = {
       key:RAZORPAY_KEY,
       amount: data.amount,
