@@ -4,6 +4,7 @@ import profileReducer from "./slices/profileSlice";
 import cartReducer from "./slices/cartSlice";
 import courseReducer from "./slices/courseSlice";
 import stepReducer from "./slices/createCourse";
+import viewCourseReducer from "./slices/viewCourseSlice"
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     profile:profileReducer,
     cart:cartReducer,
     course:courseReducer,
-    step:stepReducer
+    step:stepReducer,
+    viewCourse:viewCourseReducer
   },
 });

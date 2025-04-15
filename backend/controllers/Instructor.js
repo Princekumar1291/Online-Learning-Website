@@ -531,7 +531,17 @@ module.exports.getEnrolledCourse=async (req,res)=>{
     const userId=req.user.id;
     
     //get enrolled course
-    const enrolledCourse=await User.findById(userId).populate("courses");
+    const enrolledCourse=await User.findById(userId).populate("courses").populate({
+      path:"courses",
+      populate:{
+        path:"courseContent",
+        model:"Section",
+        populate:{
+          path:"subSection",
+          model:"SubSection"
+        }
+      }
+    });
     
     //return response
     return res.status(200).json({
