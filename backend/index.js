@@ -24,9 +24,11 @@ const fileUpload=require("express-fileupload")
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cors({
-  // origin:"https://code-boost-s1tf.vercel.app",  // Replace with your frontend URL
-  origin:"http://localhost:5173",  // Replace with your frontend URL
-  credentials: true                // Allow cookies to be sent
+  origin: [
+    "https://code-boost-s1tf.vercel.app",  // Replace with your frontend URL
+    "http://localhost:5173"                // Replace with your frontend URL
+  ],
+  credentials: true                        // Allow cookies to be sent
 }));
 app.use(cookieParser()); // We use cookieParser to parse cookies from the HTTP request headers
 
@@ -34,7 +36,7 @@ app.use(fileUpload({
   useTempFiles: true,            // Enables temporary file storage
   tempFileDir: '/tmp/',          // Directory for temporary files (OS-specific)
 }));
-
+ 
 
 //routes
 app.use("/api/v1/auth",userRoutes);
