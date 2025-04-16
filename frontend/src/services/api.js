@@ -31,3 +31,4 @@ export const getCategoryDetailsUrl=`${BASE_URL}/course/getCategoryDetails`;
 export const capturepaymentUrl=`${BASE_URL}/payment/capturepayment`;
 export const verifyPaymentUrl=`${BASE_URL}/payment/verifyPayment`;
 
+export const instructorDashboardUrl=`${BASE_URL}/profile/instructorDashboard`;

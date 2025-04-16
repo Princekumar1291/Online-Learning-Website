@@ -23,6 +23,7 @@ import Footer from './components/core/HomePage/Footer';
 import CourseDetails from './components/course/CourseDetails';
 import ViewCourse from './pages/ViewCourse';
 import DisplayEnrolledCourse from './components/viewCourse/DisplayEnrolledCourse';
+import InstructorDashboard from './components/dashBoard/InstructorDashboard';
 
 function App() {
   const { userType } = useSelector(state => state.profile)
@@ -48,6 +49,7 @@ function App() {
               <Route path='/dashboard/cart' element={<Cart />}></Route>
               <Route path='/dashboard/add-course' element={<AddCourse />}></Route>
               <Route path='/dashboard/enrolled-courses' element={<EnrolledCourses />} />
+              <Route path='/dashboard/instructor' element={<InstructorDashboard/>}></Route>
               {/* <Route path='*' element={<Outlet />} /> */}
             </Route>
 
