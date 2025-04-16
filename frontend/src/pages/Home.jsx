@@ -36,7 +36,9 @@ const Home = () => {
     };
       
     useEffect(() => {
-      fetchCartItems();
+      if(token){
+        fetchCartItems();
+      }
       console.log("cartItems",cartItems)
     }, []);
 

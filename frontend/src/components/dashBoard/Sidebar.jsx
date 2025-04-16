@@ -6,6 +6,7 @@ import { deleteToken } from '../../store/slices/authSlice'
 import { useNavigate } from 'react-router-dom'
 import { CiLogout } from "react-icons/ci";
 import ConformationModal from '../ConformationModal'
+import toast from 'react-hot-toast'
 
 
 const SideBar = () => {
