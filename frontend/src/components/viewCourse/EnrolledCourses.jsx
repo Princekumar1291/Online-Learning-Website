@@ -57,7 +57,7 @@ const EnrolledCourses = () => {
       {/* Course Grid */}
       {enrolledCourses.length === 0 ? (
         <div className="text-gray-400 text-xl pt-8 text-center">
-          You haven’t enrolled in any course yet.
+          You haven't enrolled in any course yet.
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
