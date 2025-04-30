@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { redirect, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { apiConnector } from '../../services/apiconnector';
 import { addToCartUrl, capturepaymentUrl, getCourseDetailsUrl, verifyPaymentUrl } from '../../services/api';
@@ -83,6 +83,7 @@ const CourseDetails = () => {
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message);
+      redirect("/login");
     }
   };
 
