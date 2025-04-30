@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { redirect, useParams } from 'react-router-dom';
+import { redirect, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { apiConnector } from '../../services/apiconnector';
 import { addToCartUrl, capturepaymentUrl, getCourseDetailsUrl, verifyPaymentUrl } from '../../services/api';
@@ -69,6 +69,7 @@ const CourseDetails = () => {
     rxp1.open();
   }
   
+  const navigate=useNavigate();
   const handleBuyNow = async () => {
     try {
       const orderResponse = await apiConnector("POST",capturepaymentUrl,{courses:[courseId]},{Authorization:`Bearer ${token}`});
@@ -83,7 +84,7 @@ const CourseDetails = () => {
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message);
-      redirect("/login");
+      navigate("/login");
     }
   };
 
